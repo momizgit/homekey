@@ -3,6 +3,8 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 import json
+import os
+from socketserver import ThreadingMixIn
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -39,6 +41,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         return
 
 if __name__ == '__main__':
-    server = HTTPServer(('localhost', 8000), RequestHandler)
-    print('Starting server at http://localhost:8000')
+    server_address = ('', int(os.environ.get('PORT', '8000')))
+    server = HTTPServer((server_address, 8000), RequestHandler)
+    print('Starting server at ')
+    print(server_address)
     server.serve_forever()
+    #httpd = ThreadHTTPServer(server_address, Shortener)
+    #httpd.serve_forever()
