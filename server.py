@@ -6,6 +6,7 @@ app = Flask(__name__)
 def ReturnJSON():
 	if(request.method == 'GET'):
 		data = {
+			"multi": "no"
 			"Name" : "Light",
 			"Status" : "ON",
 			"IP" : "1.1.1.1",
